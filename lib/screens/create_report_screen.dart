@@ -25,7 +25,7 @@ class _CreateReportScreenState extends State<CreateReportScreen> {
   CategoriaReporte? _categoriaSeleccionada;
   File? _imagenSeleccionada;
   LatLng? _ubicacionSeleccionada;
-  LatLng _currentPosition = const LatLng(14.6349, -90.5069); // Guatemala City por defecto
+  LatLng _currentPosition = const LatLng(14.6349, -90.5069); 
   bool _isLoading = false;
 
   @override
@@ -371,7 +371,6 @@ class _CreateReportScreenState extends State<CreateReportScreen> {
                         userAgentPackageName: 'com.example.prueba_moviles',
                       ),
                       
-                      // Marcador de ubicación seleccionada
                       if (_ubicacionSeleccionada != null)
                         MarkerLayer(
                           markers: [
