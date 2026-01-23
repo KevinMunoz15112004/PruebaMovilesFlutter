@@ -49,7 +49,6 @@ class _HomeScreenState extends State<HomeScreen> {
     
     switch (index) {
       case 0:
-        // Ya estamos en Home
         break;
       case 1:
         Navigator.of(context).pushNamed('/map');
