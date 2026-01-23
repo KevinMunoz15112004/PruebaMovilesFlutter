@@ -6,7 +6,6 @@ import '../config/supabase_config.dart';
 class ReporteService {
   final SupabaseClient _supabase = Supabase.instance.client;
 
-  // Crear un nuevo reporte
   Future<Reporte> crearReporte({
     required String titulo,
     required String descripcion,
@@ -20,7 +19,6 @@ class ReporteService {
 
     String? fotoUrl;
 
-    // Subir imagen si existe
     if (imagen != null) {
       fotoUrl = await _subirImagen(imagen);
     }
@@ -45,7 +43,6 @@ class ReporteService {
     return Reporte.fromJson(response);
   }
 
-  // Obtener reportes del usuario actual
   Future<List<Reporte>> obtenerMisReportes() async {
     final userId = _supabase.auth.currentUser?.id;
     if (userId == null) throw Exception('Usuario no autenticado');
@@ -59,7 +56,6 @@ class ReporteService {
     return (response as List).map((json) => Reporte.fromJson(json)).toList();
   }
 
-  // Obtener todos los reportes no resueltos para el mapa
   Future<List<Reporte>> obtenerReportesNoResueltos() async {
     final response = await _supabase
         .from('reportes')
@@ -70,7 +66,6 @@ class ReporteService {
     return (response as List).map((json) => Reporte.fromJson(json)).toList();
   }
 
-  // Obtener un reporte por ID
   Future<Reporte> obtenerReportePorId(String id) async {
     final response = await _supabase
         .from('reportes')
@@ -81,7 +76,6 @@ class ReporteService {
     return Reporte.fromJson(response);
   }
 
-  // Actualizar un reporte
   Future<Reporte> actualizarReporte({
     required String id,
     String? titulo,
@@ -108,7 +102,6 @@ class ReporteService {
     if (latitud != null) updates['latitud'] = latitud;
     if (longitud != null) updates['longitud'] = longitud;
 
-    // Subir nueva imagen si existe
     if (nuevaImagen != null) {
       final fotoUrl = await _subirImagen(nuevaImagen);
       updates['foto_url'] = fotoUrl;
@@ -125,7 +118,6 @@ class ReporteService {
     return Reporte.fromJson(response);
   }
 
-  // Eliminar un reporte
   Future<void> eliminarReporte(String id) async {
     final userId = _supabase.auth.currentUser?.id;
     if (userId == null) throw Exception('Usuario no autenticado');
@@ -137,7 +129,6 @@ class ReporteService {
         .eq('usuario_id', userId);
   }
 
-  // Subir imagen a Supabase Storage
   Future<String> _subirImagen(File imagen) async {
     final userId = _supabase.auth.currentUser?.id;
     final fileName = '${userId}_${DateTime.now().millisecondsSinceEpoch}.jpg';
