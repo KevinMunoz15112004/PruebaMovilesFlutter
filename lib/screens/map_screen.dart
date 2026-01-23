@@ -17,7 +17,7 @@ class _MapScreenState extends State<MapScreen> {
   final MapController _mapController = MapController();
   List<Reporte> _reportes = [];
   bool _isLoading = false;
-  LatLng _currentPosition = const LatLng(14.6349, -90.5069); // Guatemala City por defecto
+  LatLng _currentPosition = const LatLng(14.6349, -90.5069);
 
   @override
   void initState() {
@@ -28,7 +28,6 @@ class _MapScreenState extends State<MapScreen> {
 
   Future<void> _obtenerUbicacionActual() async {
     try {
-      // Verificar permisos
       LocationPermission permission = await Geolocator.checkPermission();
       if (permission == LocationPermission.denied) {
         permission = await Geolocator.requestPermission();
